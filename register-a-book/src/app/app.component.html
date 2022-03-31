@@ -1,0 +1,63 @@
+<!-- NAVBAR -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" [routerLink]="['inicio']">
+            <img src="/assets/images/book-navbar.png" alt="Libros" width="30" height="24" class="d-inline-block align-text-top">
+            RegistraTuLibro
+          </a>
+        </div>
+      </nav>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 flex-grow-1 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" [routerLink]="['inicio']">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" [routerLink]="['panel/libro']">Ver libros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" [routerLink]="['panel/autor']">Ver autores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" [routerLink]="['panel/editorial']">Ver editoriales</a>
+          </li>
+          <form class="d-flex flex-grow-1 px-3" #searchForm="ngForm">
+            <input class="form-control me-2" type="search" placeholder="Busca tu libro por palabras claves como: Nombre del libro, año, género, por la editorial o por el autor" aria-label="¿Que libro deseas buscar?" [(ngModel)]="search" #busqueda="ngModel" name="search">
+            <button class="btn btn-success" (click)="goSearch()" type="submit">Buscar</button>
+          </form>
+        </ul>
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Crear
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['panel/autor/registrar']">Registrar Autor</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['panel/editorial/registrar']">Registrar Editorial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['panel/libro/registrar']">Registrar Libro</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- CIERRE NAVBAR -->
+<!-- CONTENIDO -->
+<router-outlet></router-outlet>
+<!-- CIERRA CONTENIDO -->
+<footer class="bg-dark px-3 py-2 m-0 h1 text-center text-light fixed-bottom">
+  Desarrollado por Juan Serrano &copy;
+</footer>

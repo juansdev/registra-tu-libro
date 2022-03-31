@@ -1,0 +1,79 @@
+<div class="tab-pane shadow-lg bg-body px-3 pt-3 mb-5 pb-5 rounded fade show active col-xl-6 col-md-8 col-10 mx-auto" id="v-pills-register_book" role="tabpanel" aria-labelledby="v-pills-register_book-tab">
+  <h3 class="fw-bold">{{page_title}}</h3>
+  <div class="alert alert-success col-md-12 mt-3" *ngIf="status==='success' && !is_edit">
+    Libro subido correctamente
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3" *ngIf="status==='error' && !is_edit">
+    {{message_error}}
+  </div>
+
+  <div class="alert alert-success col-md-12 mt-3" *ngIf="status==='success' && is_edit">
+    Libro actualizado correctamente
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3" *ngIf="status==='error' && is_edit">
+    {{message_error}}
+  </div>
+  <hr>
+  <form #addBook="ngForm" (ngSubmit)="onSubmit(addBook)">
+    <div class="form-group mb-3">
+      <label for="title" class="fs-5 mb-1">Título</label>
+      <div class="input-group">
+        <input id="title" type="text" name="title" #title="ngModel" [(ngModel)]="book.title" required class="form-control" aria-label="Campo obligatorio">
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!title.valid && title.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El título no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="year" class="fs-5 mb-1">Año</label>
+      <div class="input-group">
+        <input id="year" type="text" pattern="\d*" name="year" #year="ngModel" [(ngModel)]="book.year" required class="form-control" aria-label="Campo obligatorio">
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!year.valid && year.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El año no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="gender" class="fs-5 mb-1">Género</label>
+      <div class="input-group">
+        <input id="gender" type="text" name="gender" #gender="ngModel" [(ngModel)]="book.gender" required pattern="[a-zA-ZÀ-ÿ ñ]+" class="form-control" aria-label="Campo obligatorio">
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!gender.valid && gender.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El género no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="pages" class="fs-5 mb-1">Número de páginas</label>
+      <div class="input-group">
+        <input id="pages" type="number" name="pages" #pages="ngModel" [(ngModel)]="book.pages" required class="form-control" aria-label="Campo obligatorio">
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!pages.valid && pages.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El número de páginas no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="author_id" class="fs-5 mb-1">Selecciona un autor</label>
+      <div class="input-group">
+        <select id="author_id" name="author_id" [(ngModel)]="book.author_id" aria-label="Selección del Autor" required class="form-select">
+          <option *ngFor="let author of authors" [value]="author._id">{{author.name}}</option>
+        </select>
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="editorial_id" class="fs-5 mb-1">Selecciona una editorial</label>
+      <div class="input-group">
+        <select id="editorial_id" name="editorial_id" [(ngModel)]="book.editorial_id" aria-label="Selección de la Editorial" required class="form-select">
+          <option *ngFor="let editorial of editorials" [value]="editorial._id">{{editorial.name}}</option>
+        </select>
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+    </div>
+    <div class="form-text mb-3">Importante: Todos los datos marcados con asteriscos son obligatorios.</div>
+    <input type="submit" value="{{page_title}}" class="btn btn-success d-block w-100 btn-lg" [disabled]="addBook.invalid">
+  </form>
+</div>

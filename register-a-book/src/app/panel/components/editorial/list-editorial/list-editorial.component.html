@@ -1,0 +1,121 @@
+<div class="tab-pane fade show active mb-5 pb-5" id="v-pills-my_editorials" role="tabpanel" aria-labelledby="v-pills-my_editorials-tab">
+  <!-- Título página -->
+  <h3>{{page_title}}</h3>
+  <hr/>
+  <!-- Cierra Título página -->
+  <!-- Tabla de libros -->
+  <div class="alert alert-success col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='success'">
+    Editoriales cargados correctamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='error'">
+    {{message_error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th>Nombre</th>
+        <th>Dirección de correspondencia</th>
+        <th>Telefóno</th>
+        <th>Correo electrónico</th>
+        <th>Límite de libros para registrar</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let editorial of editorials">
+        <td>{{editorial.name}}</td>
+        <td>{{editorial.address}}</td>
+        <td>{{editorial.phone}}</td>
+        <td>{{editorial.email}}</td>
+        <td>{{editorial.maximum_books_registered}}</td>
+        <td>
+          <a [routerLink]="['/panel/editorial/detalle/', editorial._id]" class="btn btn-success d-block w-100">Ver libros de la editorial</a>
+          <div class="text-center">
+            <a [routerLink]="['/panel/editorial/editar/', editorial._id]" class="btn btn-warning me-3 mt-3 mx-auto">Editar editorial</a>
+            <!-- Botón para abrir el Modal -->
+            <button type="button" class="btn btn-danger me-3 mt-3 mx-auto" data-bs-toggle="modal" [attr.data-bs-target]="'#editorial'+editorial._id" (click)="getBooksByEditorial(editorial._id)">
+              Eliminar
+            </button>
+          </div>
+
+          <!-- MODAL -->
+          <div class="modal fade" id="{{'editorial'+editorial._id}}" tabindex="-1" aria-labelledby="ModalEditorialLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <!-- MODAL CABECERA -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalEditorialLabel">¿Estas seguro de eliminar esta editorial?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- CIERRE MODAL CABECERA -->
+                <!-- MODAL CUERPO -->
+                <div class="modal-body">
+                  Vas a borrar los datos de la editorial "{{editorial.name}}" y todos los libros que se encuentran regisrados en la editorial.
+                  <hr>
+                  <!-- Título página -->
+                  <h5>Lista de libros pertenecientes a la editorial</h5>
+                  <!-- Tabla de libros -->
+                  <div class="alert alert-success col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='success'">
+                    Libros cargados correctamente
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                  </div>
+                  <div class="alert alert-danger col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='error'">
+                    {{message_error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                  </div>
+                  <table class="table table-hover">
+                    <thead class="thead-default">
+                      <tr>
+                        <th>Título</th>
+                        <th>Año</th>
+                        <th>Genero</th>
+                        <th>Número de páginas</th>
+                        <th>Editorial</th>
+                        <th>Autor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let book of books;">
+                        <td>{{book.title}}</td>
+                        <td>{{book.year}}</td>
+                        <td>{{book.gender}}</td>
+                        <td>{{book.pages}}</td>
+                        <td>{{book.editorial.name}}</td>
+                        <td>{{book.author.name}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- CIERRE TABLA DE LIBROS -->
+                </div>
+                <!-- CIERRE MODAL CUERPO -->
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                  <a (click)="deleteEditorial(editorial._id)" class="btn btn-danger" data-bs-dismiss="modal">Borrar</a>
+                </div>
+                <!-- CIERRE MODAL FOOTER -->
+              </div>
+            </div>
+          </div>
+          <!-- CIERRE MODAL -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- CIERRA TABLA DE EDITORIALES -->
+  <!-- NAVEGACIÓN DE PAGINACIÓN -->
+  <ul class="pagination mt-4 justify-content-center" *ngIf="!no_paginate">
+    <li class="page-item fs-5">
+      <a class="page-link" [routerLink]="['/panel/editorial/listado',prev_page]">&laquo;</a>
+    </li>
+    <li class="page-item fs-5" *ngFor="let num of number_pages">
+      <a class="page-link" [routerLink]="['/panel/editorial/listado',num]">{{num}}</a>
+    </li>
+    <li class="page-item fs-5">
+      <a class="page-link" [routerLink]="['/panel/editorial/listado',next_page]">&raquo;</a>
+    </li>
+  </ul>
+  <!-- CIERRE NAVEGACIÓN DE PAGINACIÓN -->
+</div>

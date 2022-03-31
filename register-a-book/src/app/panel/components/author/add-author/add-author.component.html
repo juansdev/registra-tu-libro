@@ -1,0 +1,52 @@
+<div class="tab-pane shadow-lg bg-body px-3 pt-3 mb-5 pb-5 rounded fade show active col-xl-6 col-md-8 col-10 mx-auto" id="v-pills-register_author" role="tabpanel" aria-labelledby="v-pills-register_author-tab">
+  <h3 class="fw-bold">{{page_title}}</h3>
+  <div class="alert alert-success col-md-12 mt-3" *ngIf="status==='success' && !is_edit">
+    Autor subido correctamente
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3" *ngIf="status==='error' && !is_edit">
+    {{message_error}}
+  </div>
+
+  <div class="alert alert-success col-md-12 mt-3" *ngIf="status==='success' && is_edit">
+    Autor actualizado correctamente
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3" *ngIf="status==='error' && is_edit">
+    {{message_error}}
+  </div>
+  <hr>
+  <form #addAuthor="ngForm" (ngSubmit)="onSubmit(addAuthor)">
+    <div class="form-group mb-3">
+      <label for="name" class="fs-5 mb-1">Nombre completo</label>
+      <div class="input-group">
+        <input id="name" type="text" name="name" #name="ngModel" [(ngModel)]="author.name" required pattern="[a-zA-ZÀ-ÿ ñ]+" class="form-control" aria-label="Campo obligatorio">
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!name.valid && name.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El nombre no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="email" class="fs-5 mb-1">Correo electrónico</label>
+      <div class="input-group">
+        <input id="email" type="email" name="email" #email="ngModel" [(ngModel)]="author.email" required pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" aria-label="Campo obligatorio"/>
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!email.valid && email.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El correo electrónico no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="date_of_birth" class="fs-5 mb-1">Fecha de nacimiento (opcional)</label>
+      <input id="date_of_birth" type="date" name="date_of_birth" #date_of_birth="ngModel" [(ngModel)]="author.date_of_birth" class="form-control"/>
+      <small *ngIf="!date_of_birth.valid && date_of_birth.touched" class="invalid-feedback d-block">
+        <i class="fas fa-exclamation-triangle"></i> La fecha de nacimiento no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="city_of_origin" class="fs-5 mb-1">Ciudad de procedencia (opcional)</label>
+      <input id="city_of_origin" type="text" name="city_of_origin" #city_of_origin="ngModel" [(ngModel)]="author.city_of_origin" class="form-control"/>
+    </div>
+    <div class="form-text mb-3">Importante: Todos los datos marcados con asteriscos son obligatorios.</div>
+    <input type="submit" value="{{page_title}}" class="btn btn-success d-block w-100 btn-lg" [disabled]="addAuthor.invalid">
+  </form>
+</div>

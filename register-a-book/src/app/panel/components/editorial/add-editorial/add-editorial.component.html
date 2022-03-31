@@ -1,0 +1,69 @@
+<div class="tab-pane shadow-lg bg-body px-3 pt-3 mb-5 pb-5 rounded fade show active col-xl-6 col-md-8 col-10 mx-auto" id="v-pills-register_editorial" role="tabpanel" aria-labelledby="v-pills-register_editorial-tab">
+  <h3 class="fw-bold">{{page_title}}</h3>
+  <div class="alert alert-success col-md-12 mt-3" *ngIf="status==='success' && !is_edit">
+    Editorial subido correctamente
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3" *ngIf="status==='error' && !is_edit">
+    {{message_error}}
+  </div>
+
+  <div class="alert alert-success col-md-12 mt-3" *ngIf="status==='success' && is_edit">
+    Editorial actualizado correctamente
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3" *ngIf="status==='error' && is_edit">
+    {{message_error}}
+  </div>
+  <hr>
+  <form #addEditorial="ngForm" (ngSubmit)="onSubmit(addEditorial)">
+    <label for="name" class="fs-5 mb-1">Nombre</label>
+    <div class="form-group mb-3">
+      <div class="input-group">
+        <input id="name" type="text" name="name" #name="ngModel" [(ngModel)]="editorial.name" required pattern="[a-zA-ZÀ-ÿ ñ]+" class="form-control" aria-label="Campo obligatorio"/>
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!name.valid && name.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El nombre no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="address" class="fs-5 mb-1">Dirección de correspondencia</label>
+      <div class="input-group">
+        <input id="address" type="text" name="address" #address="ngModel" [(ngModel)]="editorial.address" required class="form-control" aria-label="Campo obligatorio"/>
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!address.valid && address.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> La dirección no es valida
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="phone" class="fs-5 mb-1">Teléfono</label>
+      <div class="input-group">
+        <input id="phone" type="text" name="phone" #phone="ngModel" [(ngModel)]="editorial.phone" required class="form-control"/>
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!phone.valid && phone.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El teléfono no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="email" class="fs-5 mb-1">Correo electrónico</label>
+      <div class="input-group">
+        <input id="email" type="email" name="email" #email="ngModel" [(ngModel)]="editorial.email" required pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control"/>
+        <span class="text-danger input-group-text fs-bold fs-5">*</span>
+      </div>
+      <small *ngIf="!email.valid && email.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El correo electrónico no es valido
+      </small>
+    </div>
+    <div class="form-group mb-3">
+      <label for="maximum_books_registered" class="fs-5 mb-1">Límite de libros a registrar (opcional)</label>
+      <input id="maximum_books_registered" type="number" name="maximum_books_registered" #maximum_books_registered="ngModel" [(ngModel)]="editorial.maximum_books_registered" class="form-control" aria-describedby="maximumBooksRegisteredHelp"/>
+      <div id="maximumBooksRegisteredHelp" class="form-text">Nota: El valor -1 significa que la editorial no tendrá un límite de libros registrados.</div>
+      <small *ngIf="!maximum_books_registered.valid && maximum_books_registered.touched" class="invalid-feedback fw-bold d-block">
+        <i class="fas fa-exclamation-triangle"></i> El límite de libros registrados no es valido
+      </small>
+    </div>
+    <div class="form-text mb-3">Importante: Todos los datos marcados con asteriscos son obligatorios.</div>
+    <input type="submit" value="{{page_title}}" class="btn btn-success d-block w-100 btn-lg" [disabled]="addEditorial.invalid">
+  </form>
+</div>

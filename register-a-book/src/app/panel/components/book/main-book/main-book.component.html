@@ -1,0 +1,15 @@
+
+<div class="d-flex align-items-start flex-column flex-md-row">
+  <div class="nav flex-column fs-5 nav-pills p-4 bg-dark col-md-4 col-12 col-xl-2 me-0" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <div class="navbar-brand text-light">
+      <img src="/assets/images/book-icon-nav-pills.webp" alt="Libros" width="30" height="30" class="d-inline-block align-text-top">
+      Panel del Libro
+    </div>
+    <div class="border-top border-light my-4"></div>
+    <a class="nav-link active text-light mb-3 text-start" id="v-pills-my_books-tab" data-bs-toggle="pill" data-bs-target="#v-pills-my_books" [routerLink]="['listado']" type="button" role="tab" aria-controls="v-pills-my_books" aria-selected="true"><i class="fas fa-book"></i> Mis libros</a>
+    <a class="nav-link text-start text-light" [routerLink]="['registrar']" id="v-pills-register_book-tab" data-bs-toggle="pill" data-bs-target="#v-pills-register_book" type="button" role="tab" aria-controls="v-pills-register_book" aria-selected="false"><i class="fas fa-key"></i> Registrar libro</a>
+  </div>
+  <div class="tab-content mt-md-0 mt-5 col-xl-10 col-md-8 col-12 vh-100 py-md-5 px-md-0 p-lg-5" id="v-pills-tabContent">
+    <router-outlet></router-outlet>
+  </div>
+</div>

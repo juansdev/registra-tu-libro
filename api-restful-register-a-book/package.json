@@ -1,0 +1,22 @@
+{
+  "name": "api-restful-register-a-book",
+  "version": "1.0.0",
+  "description": "Api RestFul del proyecto Registra tu libro.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Juan Guillermo Serrano Ramírez",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.14",
+    "mongoose-paginate-v2": "^1.3.18",
+    "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

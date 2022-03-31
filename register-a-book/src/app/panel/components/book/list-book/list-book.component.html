@@ -1,0 +1,107 @@
+<div class="tab-pane fade show active mb-5 pb-5" id="v-pills-my_books" role="tabpanel" aria-labelledby="v-pills-my_books-tab">
+  <!-- Si es listado de libros por Autor - Mostrar detalles del Autor -->
+  <div *ngIf="is_list_by_author && books.length">
+    <h3>Información del autor {{books[0].author.name}}</h3>
+    <hr>
+    <p>
+      <strong>Fecha de nacimiento:</strong> {{books[0].author.date_of_birth}}
+    </p>
+    <p>
+      <strong>Ciudad de procedencia:</strong> {{books[0].author.city_of_origin}}
+    </p>
+    <p>
+      <strong>Correo electrónico:</strong> {{books[0].author.email}}
+    </p>
+  </div>
+  <!-- Si es listado de libros por Editorial - Mostrar detalles de la Editorial -->
+  <div *ngIf="is_list_by_editorial && books.length">
+    <h3>Información de la editorial {{books[0].editorial.name}}</h3>
+    <hr>
+    <p>
+      <strong>Dirección de correspondecia:</strong> {{books[0].editorial.address}}
+    </p>
+    <p>
+      <strong>Teléfono:</strong> {{books[0].editorial.phone}}
+    </p>
+    <p>
+      <strong>Correo electrónico:</strong> {{books[0].editorial.email}}
+    </p>
+  </div>
+  <!-- Título página -->
+  <hr/>
+  <h3>{{page_title}}</h3>
+  <hr>
+  <!-- Cierra Título página -->
+  <!-- Tabla de libros -->
+  <div class="alert alert-success col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='success'">
+    Libros cargados correctamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='error'">
+    {{message_error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th>Título</th>
+        <th>Año</th>
+        <th>Género</th>
+        <th>Número de páginas</th>
+        <th>Editorial</th>
+        <th>Autor</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books;">
+        <td>{{book.title}}</td>
+        <td>{{book.year}}</td>
+        <td>{{book.gender}}</td>
+        <td>{{book.pages}}</td>
+        <td>{{book.editorial.name}}</td>
+        <td>{{book.author.name}}</td>
+        <td>
+          <a [routerLink]="['/panel/libro/editar/', book._id]" class="btn btn-warning me-3 my-3 mx-auto">Editar libro</a>
+
+          <!-- Botón para abrir el Modal -->
+          <button type="button" class="btn btn-danger me-3 my-3 mx-auto" data-bs-toggle="modal" [attr.data-bs-target]="'#book'+book._id">
+            Eliminar
+          </button>
+
+          <div class="modal fade" id="{{'book'+book._id}}" tabindex="-1" aria-labelledby="ModalBookLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalBookLabel">¿Estas seguro de eliminar este libro?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Vas a borrar los datos del libro "{{book.title}}" para siempre...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                  <a (click)="deleteBook(book._id)" class="btn btn-danger" data-bs-dismiss="modal">Borrar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- CIERRA TABLA DE LIBROS -->
+  <!-- NAVEGACIÓN DE PAGINACIÓN -->
+  <ul class="pagination mt-4 justify-content-center" *ngIf="!no_paginate">
+    <li class="page-item fs-5">
+      <a class="page-link" [routerLink]="['/panel/libro/listado',prev_page]">&laquo;</a>
+    </li>
+    <li class="page-item fs-5" *ngFor="let num of number_pages">
+      <a class="page-link" [routerLink]="['/panel/libro/listado',num]">{{num}}</a>
+    </li>
+    <li class="page-item fs-5">
+      <a class="page-link" [routerLink]="['/panel/libro/listado',next_page]">&raquo;</a>
+    </li>
+  </ul>
+  <!-- CIERRE NAVEGACIÓN DE PAGINACIÓN -->
+</div>

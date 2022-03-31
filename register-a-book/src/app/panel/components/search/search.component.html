@@ -1,0 +1,70 @@
+<div class="mb-5 pb-5 pt-3 px-3">
+  <h3>{{page_title}}</h3>
+  <hr>
+  <!-- ESTADOS -->
+  <div class="alert alert-success col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='success'">
+    Libros cargados correctamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='error'">
+    {{message_error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <!-- CIERRE DE ESTADOS -->
+  <!-- TABLA DE BUSQUEDA -->
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th>Título</th>
+        <th>Año</th>
+        <th>Género</th>
+        <th>Número de páginas</th>
+        <th>Editorial</th>
+        <th>Autor</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Coincidencias por Libro -->
+      <tr *ngFor="let book of books">
+        <td>{{book.title}}</td>
+        <td>{{book.year}}</td>
+        <td>{{book.gender}}</td>
+        <td>{{book.pages}}</td>
+        <td>{{book.editorial.name}}</td>
+        <td>{{book.author.name}}</td>
+        <td>
+          <a [routerLink]="['/panel/autor/detalle/', book.author._id]" class="btn btn-success my-3 mx-3">Ver autor</a>
+          <a [routerLink]="['/panel/editorial/detalle/', book.editorial._id]" class="btn btn-success my-3 mx-3">Ver editorial</a>
+          <a [routerLink]="['/panel/libro/editar/', book._id]" class="btn btn-warning my-3 mx-3">Editar libro</a>
+
+          <!-- Botón para abrir el Modal -->
+          <button type="button" class="btn btn-danger mx-3" data-bs-toggle="modal" [attr.data-bs-target]="'#book'+book._id">
+            Eliminar libro
+          </button>
+
+          <!-- MODAL -->
+          <div class="modal fade" id="{{'book'+book._id}}" tabindex="-1" aria-labelledby="ModalBookLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalBookLabel">¿Estas seguro de eliminar este autor?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Vas a borrar los datos del autor "{{book.title}}" para siempre...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                  <a (click)="deleteBook(book._id)" class="btn btn-danger" data-bs-dismiss="modal">Borrar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- CIERRE MODAL -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- CIERRE TABLA DE BUSQUEDA -->
+</div>

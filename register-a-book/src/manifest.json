@@ -1,0 +1,46 @@
+{
+  "name": "Registra Tu libro",
+  "short_name": "RegistraTuLibro",
+  "lang": "es-CO",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "Simulación de registro de un libro en una editorial, registra tus propios autores y editoriales.",
+  "icons": [{
+    "src": "/assets/icon/72.png",
+    "sizes": "72X72",
+    "type": "image/png"
+  },{
+    "src": "/assets/icon/76.png",
+    "sizes": "76X76",
+    "type": "image/png"
+  },{
+    "src": "/assets/icon/96.png",
+    "sizes": "96X96",
+    "type": "image/png"
+  },{
+    "src": "/assets/icon/114.png",
+    "sizes": "114X114",
+    "type": "image/png"
+  },{
+    "src": "/assets/icon/120.png",
+    "sizes": "120X120",
+    "type": "image/png"
+  },{
+    "src": "/assets/icon/144.png",
+    "sizes": "144X144",
+    "type": "image/png"
+  },{
+    "src": "/assets/icon/152.png",
+    "sizes": "152X152",
+    "type": "image/png"
+  },{
+    "src": "/assets/icon/228.png",
+    "sizes": "228X228",
+    "type": "image/png"
+  },{
+    "src": "./favicon.ico",
+    "sizes": "128X128",
+    "type": "image/vnd.microsoft.icon"
+  }]
+}

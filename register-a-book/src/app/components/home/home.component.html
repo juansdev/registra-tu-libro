@@ -1,0 +1,66 @@
+<main class="container pb-5">
+  <!-- PRESENTACIÓN - PRINCIPAL -->
+  <div class="px-4 pb-4 pt-0 px-md-5 pb-md-5 text-white bg-dark">
+    <div class="mt-3 d-inline-block col-lg-6 px-0">
+      <h1 class="display-4 fst-italic">{{page_title}}</h1>
+      <p class="lead my-3">Aquí podrás registrar el autor, registrar la editorial y finalmente, ¡Registrar tu propio libro con su propio autor y en la editorial que tú gustes!</p>
+      <p class="lead mb-0"><a href="#" class="text-white fw-bold">A continuación podrás comenzar con los registros...</a></p>
+    </div>
+    <div class="mt-3 d-inline-block col-lg-6 px-0">
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="assets/images/writer-main.webp" alt="Escritora" class="w-75 h-auto d-inline-block">
+      </div>
+    </div>
+  </div>
+  <!-- CIERRE PRESENTACIÓN -->
+  <!-- TARGETAS - REGISTRO -->
+  <div class="row row-cols-1 pt-3 text-center row-cols-lg-2 row-cols-xl-3 g-5 px-5 my-3 pb-4">
+    <div class="col mx-auto mt-0 mt-xl-5">
+      <div class="card mx-auto shadow-sm">
+        <img src="/assets/images/bookshelf-cards.webp" class="card-img-top mt-5 h-auto w-50 mx-auto" alt="Montón de libros">
+        <div class="card-body mt-3">
+          <h3 class="fw-bold mb-3">
+            Paso 1: Registra tu editorial
+          </h3>
+          <p class="card-text">Registrar una editorial en el sistema es necesario para registrar un libro.</p>
+          <a [routerLink]="['/panel/editorial/registrar']" class="d-block w-100 btn btn-success d-block btn-lg mt-3">
+            Ir a registrar la editorial
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col mx-auto mt-5 mt-lg-0 mt-xl-4">
+      <div class="card mx-auto shadow-sm">
+        <div class="mt-5 mb-3">
+          <img src="/assets/images/author-cards.webp" class="card-img-top" alt="Montón de libros">
+        </div>
+        <div class="card-body">
+          <h3 class="fw-bold mb-3">
+            Paso 2: Registra un autor
+          </h3>
+          <p class="card-text">Aunque registrar una editorial es importante, sin un autor, un libro no puede ser registrado.</p>
+          <a [routerLink]="['/panel/autor/registrar']" class="d-block w-100 btn btn-success d-block btn-lg mt-3">
+            Ir a registrar autor
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col mx-auto mt-lg-5 mt-xl-0">
+      <div class="card mx-auto shadow-sm">
+        <div class="mt-5 mb-3">
+          <img src="/assets/images/books-cards.webp" class="card-img-top" alt="Montón de libros">
+        </div>
+        <div class="card-body">
+          <h3 class="fw-bold mb-3">
+            Paso 3: Registra tu libro
+          </h3>
+          <p class="card-text">Y finalmente, !Solo queda registrar tu libro¡.</p>
+          <a [routerLink]="['/panel/libro/registrar']" class="d-block w-100 btn btn-success d-block btn-lg mt-3">
+            Ir a registrar libro
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CIERRE TARGETAS -->
+</main>

@@ -1,0 +1,119 @@
+<div class="tab-pane fade show active mb-5 pb-5" id="v-pills-my_authors" role="tabpanel" aria-labelledby="v-pills-my_authors-tab">
+  <!-- Título página -->
+  <h3>{{page_title}}</h3>
+  <hr/>
+  <!-- Cierra Título página -->
+  <!-- TABLA DE AUTORES -->
+  <div class="alert alert-success col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='success'">
+    Actores cargados correctamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <div class="alert alert-danger col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='error'">
+    {{message_error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th>Nombre completo</th>
+        <th>Ciudad de procedencia</th>
+        <th>Fecha de nacimiento</th>
+        <th>Correo electrónico</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of authors">
+        <td>{{author.name}}</td>
+        <td>{{author.city_of_origin}}</td>
+        <td>{{author.date_of_birth}}</td>
+        <td>{{author.email}}</td>
+        <td>
+          <a [routerLink]="['/panel/autor/detalle/', author._id]" class="btn btn-success d-block w-100">Ver libros del autor</a>
+          <div class="text-center">
+            <a [routerLink]="['/panel/autor/editar/', author._id]" class="btn btn-warning me-3 mt-3 mx-auto">Editar autor</a>
+            <!-- Botón para abrir el Modal -->
+            <button type="button" class="btn btn-danger me-3 mt-3 mx-auto" data-bs-toggle="modal" [attr.data-bs-target]="'#author'+author._id" (click)="getBooksByAuthor(author._id)">
+              Eliminar
+            </button>
+          </div>
+
+          <!-- MODAL -->
+          <div class="modal fade" id="{{'author'+author._id}}" tabindex="-1" aria-labelledby="ModalAuthorLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <!-- MODAL CABECERA -->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="ModalAuthorLabel">¿Estas seguro de eliminar este autor?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- CIERRE MODAL CABECERA -->
+                <!-- MODAL CUERPO -->
+                <div class="modal-body">
+                  Vas a borrar los datos del autor "{{author.name}}" y todos los libros que el autor ha registrado.
+                  <hr>
+                  <!-- Título página -->
+                  <h5>Lista de libros pertenecientes al autor</h5>
+                  <!-- TABLA DE LIBROS -->
+                  <div class="alert alert-success col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='success'">
+                    Libros cargados correctamente
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                  </div>
+                  <div class="alert alert-danger col-md-12 mt-3 alert-dismissible fade show" role="alert" *ngIf="status==='error'">
+                    {{message_error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                  </div>
+                  <table class="table table-hover">
+                    <thead class="thead-default">
+                      <tr>
+                        <th>Título</th>
+                        <th>Año</th>
+                        <th>Genero</th>
+                        <th>Número de páginas</th>
+                        <th>Editorial</th>
+                        <th>Autor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let book of books;">
+                        <td>{{book.title}}</td>
+                        <td>{{book.year}}</td>
+                        <td>{{book.gender}}</td>
+                        <td>{{book.pages}}</td>
+                        <td>{{book.editorial.name}}</td>
+                        <td>{{book.author.name}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- CIERRE TABLA DE LIBROS -->
+                </div>
+                <!-- CIERRE MODAL CUERPO -->
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                  <a (click)="deleteAuthor(author._id)" class="btn btn-danger" data-bs-dismiss="modal">Borrar</a>
+                </div>
+                <!-- CIERRE MODAL FOOTER -->
+              </div>
+            </div>
+          </div>
+          <!-- CIERRE MODAL -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- CIERRA TABLA DE AUTORES -->
+  <!-- NAVEGACIÓN DE PAGINACIÓN -->
+  <ul class="pagination mt-4 justify-content-center" *ngIf="!no_paginate">
+    <li class="page-item fs-5">
+      <a class="page-link" [routerLink]="['/panel/autor/listado',prev_page]">&laquo;</a>
+    </li>
+    <li class="page-item fs-5" *ngFor="let num of number_pages">
+      <a class="page-link" [routerLink]="['/panel/autor/listado',num]">{{num}}</a>
+    </li>
+    <li class="page-item fs-5">
+      <a class="page-link" [routerLink]="['/panel/autor/listado',next_page]">&raquo;</a>
+    </li>
+  </ul>
+  <!-- CIERRE NAVEGACIÓN DE PAGINACIÓN -->
+</div>
